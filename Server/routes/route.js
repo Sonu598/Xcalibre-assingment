@@ -18,7 +18,7 @@ Router.post("/query", async (req, res) => {
     queryCache.set(naturalQuery, rows);
     res.json(rows);
   } catch (error) {
-    res.status(500).json({ Error: error.message });
+    res.status(500).json({ Error_: error.message });
   }
 });
 

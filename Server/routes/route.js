@@ -3,14 +3,14 @@ const Router = express.Router();
 const db = require("../config/db");
 const convertTextToSQL = require("../middleware/geminAI");
 // const limiter = require("../middleware/retelimit");
-const NodeCache = require("node-cache");
-const queryCache = new NodeCache({ stdTTL: 300 });
+// const NodeCache = require("node-cache");
+// const queryCache = new NodeCache({ stdTTL: 300 });
 
 Router.post("/query", async (req, res) => {
   const { naturalQuery } = req.body;
   if (!naturalQuery) return res.status(400).json({ error: "Query required" });
-  if (queryCache.has(naturalQuery)) {
-    return res.json(queryCache.get(naturalQuery));
+  if (naturalQuery) {
+    return res.json(naturalQuery);
   }
   try {
     const sqlQuery = await convertTextToSQL(naturalQuery);

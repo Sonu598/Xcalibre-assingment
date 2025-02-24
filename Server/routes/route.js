@@ -10,7 +10,7 @@ Router.post("/query", async (req, res) => {
   const { naturalQuery } = req.body;
   if (!naturalQuery) return res.status(400).json({ error: "Query required" });
   if (naturalQuery) {
-    return res.json(naturalQuery);
+    return naturalQuery;
   }
   try {
     const sqlQuery = await convertTextToSQL(naturalQuery);

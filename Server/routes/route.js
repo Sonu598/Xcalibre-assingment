@@ -10,15 +10,13 @@ Router.post("/query", async (req, res) => {
   const { naturalQuery } = req.body;
   if (!naturalQuery) return res.status(400).json({ error: "Query required" });
   if (naturalQuery) {
-    return naturalQuery;
-  }
-  try {
-    const sqlQuery = await convertTextToSQL(naturalQuery);
-    const [rows] = await db.query(sqlQuery);
-    queryCache.set(naturalQuery, rows);
-    res.json(rows);
-  } catch (error) {
-    res.status(500).json({ Error_: error.message, data: sqlQuery });
+    try {
+      const sqlQuery = await convertTextToSQL(naturalQuery);
+      const [rows] = await db.query(sqlQuery);
+      res.json(rows);
+    } catch (error) {
+      res.status(500).json({ Error_: error.message });
+    }
   }
 });
 

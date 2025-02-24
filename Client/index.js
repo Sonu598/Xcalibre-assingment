@@ -12,11 +12,14 @@ async function generateSQL() {
   loader.style.display = "block";
 
   try {
-    const response = await fetch("http://localhost:2015/hospitalAi/query", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ naturalQuery: query }),
-    });
+    const response = await fetch(
+      "https://xcalibre-assingment.onrender.com/hospitalAi/query",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ naturalQuery: query }),
+      }
+    );
 
     const data = await response.json();
     loader.style.display = "none";

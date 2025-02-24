@@ -3,6 +3,7 @@ const cors = require("cors");
 const Router = require("./routes/route");
 const app = express();
 require("dotenv").config();
+app.set("trust proxy", 1); // Trust the first proxy (Render)
 app.use(express.json());
 app.use(cors());
 

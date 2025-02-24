@@ -2,11 +2,11 @@ const express = require("express");
 const Router = express.Router();
 const db = require("../config/db");
 const convertTextToSQL = require("../middleware/geminAI");
-const limiter = require("../middleware/retelimit");
+// const limiter = require("../middleware/retelimit");
 const NodeCache = require("node-cache");
 const queryCache = new NodeCache({ stdTTL: 300 });
 
-Router.post("/query", limiter, async (req, res) => {
+Router.post("/query", async (req, res) => {
   const { naturalQuery } = req.body;
   if (!naturalQuery) return res.status(400).json({ error: "Query required" });
   if (queryCache.has(naturalQuery)) {
